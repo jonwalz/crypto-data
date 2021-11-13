@@ -47,7 +47,7 @@ function Currencies() {
   let handleChange = (e) => {
     setSearchValue((prevValue) => e.target.value);
   };
-  let filteredCrypto = crypto.filter((value) => {
+  let filteredSearchCrypto = crypto.filter((value) => {
     let { name } = value.props;
     if (searchValue !== "") {
       return name.toLowerCase().includes(searchValue.toLowerCase());
@@ -58,7 +58,7 @@ function Currencies() {
   return (
     <>
       <input type="text" placeholder="SEARCH" onChange={handleChange} />
-      <ul>{filteredCrypto}</ul>
+      <ul>{filteredSearchCrypto}</ul>
     </>
   );
 }
