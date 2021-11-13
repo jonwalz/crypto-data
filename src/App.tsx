@@ -1,4 +1,6 @@
 import { createClient, Provider, useQuery } from "urql";
+import { useState } from "react";
+import Crypto from "./Crypto/Crypto";
 import "./App.css";
 
 const CURRENCIES_EXAMPLE = `
@@ -21,6 +23,7 @@ const client = createClient({
 function Currencies() {
   // useQuery will make a POST request with CURRENCIES_EXAMPLE as the body
   const [result] = useQuery({ query: CURRENCIES_EXAMPLE });
+  const [searchValue, setSearchValue] = useState("");
 
   const { data, fetching, error } = result;
 
@@ -30,19 +33,33 @@ function Currencies() {
   if (error) return <div>Whoops, something bad happened...</div>;
 
   // Check the console to see data shape
-  console.log("DATA: ", data.allCurrencyProjects);
-
+  // console.log("DATA: ", data.allCurrencyProjects);
+  const crypto = data.allCurrencyProjects.map((currency, i) => {
+    return (
+      <Crypto
+        key={`${currency.name} ${i}`}
+        priceUsd={currency.priceUsd}
+        i={i}
+        name={currency.name}
+      />
+    );
+  });
+  let handleChange = (e) => {
+    setSearchValue((prevValue) => e.target.value);
+  };
+  let filteredSearchCrypto = crypto.filter((value) => {
+    let { name } = value.props;
+    if (searchValue !== "") {
+      return name.toLowerCase().includes(searchValue.toLowerCase());
+    } else {
+      return true;
+    }
+  });
   return (
-    <ul>
-      {data.allCurrencyProjects.map((currency, i) => {
-        return (
-          <li key={`${currency.name}+${i}`}>
-            <div>Name: {currency.name}</div>
-            <div>Currency price: {currency.priceUsd}</div>
-          </li>
-        );
-      })}
-    </ul>
+    <>
+      <input type="text" placeholder="SEARCH" onChange={handleChange} />
+      <ul>{filteredSearchCrypto}</ul>
+    </>
   );
 }
 
