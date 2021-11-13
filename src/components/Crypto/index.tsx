@@ -1,4 +1,4 @@
-export default function Crypto({ name, i, priceUsd }) {
+export function Crypto({ name, i, priceUsd }) {
   return (
     <li key={`${name} ${i}`}>
       <div>Name: {name}</div>
