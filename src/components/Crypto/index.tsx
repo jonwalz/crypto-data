@@ -10,7 +10,7 @@ export function Crypto({ name, i, priceUsd, symbol }) {
         style={{ listStyleType: "none", margin: "7px 0px 0px 7px" }}
       >
         <div>Name: {name}</div>
-        <div>Symbol: {symbol}</div>
+        <div>Symbol: {symbol || "N/A"}</div>
         <div>Price(USD): {priceUsd || "N/A"}</div>
         <h1 style={{ opacity: ".5" }}>{firstLetterOfName}</h1>
       </li>
