@@ -5,6 +5,7 @@ const props = {
   name: "Test",
   i: 0,
   priceUsd: "1",
+  symbol: "",
 };
 describe("Crypto component", () => {
   it("Should render correctly", () => {

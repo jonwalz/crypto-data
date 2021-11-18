@@ -28,7 +28,7 @@ export function Currencies() {
   if (error) return <div>Whoops, something bad happened...</div>;
 
   // Check the console to see data shape
-  // console.log("DATA: ", data.allCurrencyProjects);
+  console.log("DATA: ", data.allCurrencyProjects);
   const crypto = data.allCurrencyProjects.map((currency, i) => {
     return (
       <Crypto
@@ -36,6 +36,7 @@ export function Currencies() {
         priceUsd={currency.priceUsd}
         i={i}
         name={currency.name}
+        symbol={currency.symbol}
       />
     );
   });
@@ -46,9 +47,8 @@ export function Currencies() {
     let { name } = value.props;
     if (searchValue !== "") {
       return name.toLowerCase().includes(searchValue.toLowerCase());
-    } else {
-      return true;
     }
+    return true;
   });
   return (
     <>
