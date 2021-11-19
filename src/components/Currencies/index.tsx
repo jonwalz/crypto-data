@@ -1,6 +1,7 @@
 import { useQuery } from "urql";
 import { useState } from "react";
 import { Crypto } from "../Crypto";
+import { Input } from "./styles";
 
 const CURRENCIES_EXAMPLE = `
   query {
@@ -40,6 +41,7 @@ export function Currencies() {
       />
     );
   });
+
   let handleChange = (e) => {
     setSearchValue((prevValue) => e.target.value);
   };
@@ -49,9 +51,10 @@ export function Currencies() {
       ? props.name.toLowerCase().includes(searchValue.toLowerCase())
       : true
   );
+
   return (
     <>
-      <input type="text" placeholder="SEARCH" onChange={handleChange} />
+      <Input type="text" placeholder="SEARCH" onChange={handleChange} />
       <ul>{filteredSearchCrypto}</ul>
     </>
   );

@@ -5,6 +5,7 @@
   "dependencies": {
     "@nivo/bar": "^0.74.0",
     "@nivo/core": "^0.74.0",
+    "@radix-ui/colors": "^0.1.7",
     "@radix-ui/react-popover": "^0.1.1",
     "@stitches/react": "^1.2.5",
     "@testing-library/jest-dom": "^5.11.4",

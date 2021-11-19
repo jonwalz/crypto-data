@@ -1564,6 +1564,11 @@
     schema-utils "^2.6.5"
     source-map "^0.7.3"
 
+"@radix-ui/colors@^0.1.7":
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/@radix-ui/colors/-/colors-0.1.7.tgz#055cdf104f92ae58a7d6a7f1c7327c635b90747f"
+  integrity sha512-E6+ZPQ+FFn1/NZ4c/KRvZTu9KjC/MXrbJNETYs1HKe96gyxQivPu65FkhOsRnPigvJ0YJ9ZxYGxayqDNmaC1cQ==
+
 "@radix-ui/popper@0.1.0":
   version "0.1.0"
   resolved "https://registry.npmjs.org/@radix-ui/popper/-/popper-0.1.0.tgz"
