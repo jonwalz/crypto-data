@@ -43,13 +43,12 @@ export function Currencies() {
   let handleChange = (e) => {
     setSearchValue((prevValue) => e.target.value);
   };
-  let filteredSearchCrypto = crypto.filter((value) => {
-    let { name } = value.props;
-    if (searchValue !== "") {
-      return name.toLowerCase().includes(searchValue.toLowerCase());
-    }
-    return true;
-  });
+
+  const filteredSearchCrypto = crypto.filter(({ props }) =>
+    searchValue !== ""
+      ? props.name.toLowerCase().includes(searchValue.toLowerCase())
+      : true
+  );
   return (
     <>
       <input type="text" placeholder="SEARCH" onChange={handleChange} />
