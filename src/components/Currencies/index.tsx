@@ -42,7 +42,7 @@ export function Currencies() {
     );
   });
 
-  let handleChange = (e) => {
+  const handleChange = (e) => {
     setSearchValue((prevValue) => e.target.value);
   };
 
@@ -55,6 +55,9 @@ export function Currencies() {
   return (
     <>
       <Input type="text" placeholder="SEARCH" onChange={handleChange} />
+
+      <br />
+      <br />
       <ul>{filteredSearchCrypto}</ul>
     </>
   );

@@ -1,19 +1,23 @@
-import "../../App.css";
+// import "../../App.css";
+import { Li } from "./styles";
 
 export function Crypto({ name, i, priceUsd, symbol }) {
   let firstLetterOfName = name.charAt(0);
 
   return (
-    <div className="crypto">
-      <li
-        key={`${name} ${i}`}
-        style={{ listStyleType: "none", margin: "7px 0px 0px 7px" }}
-      >
-        <div>Name: {name}</div>
-        <div>Symbol: {symbol || "N/A"}</div>
-        <div>Price(USD): {priceUsd || "N/A"}</div>
-        <h1 style={{ opacity: ".5" }}>{firstLetterOfName}</h1>
-      </li>
-    </div>
+    <Li key={`${name} ${i}`}>
+      <div>
+        Name: <span>{name}</span>
+      </div>
+      <div>
+        Symbol: <span>{symbol || "N/A"}</span>
+      </div>
+      <div>
+        Price(USD): <span>{priceUsd || "N/A"}</span>
+      </div>
+      <h1 style={{ opacity: ".5" }}>
+        <span>{firstLetterOfName}</span>
+      </h1>
+    </Li>
   );
 }
