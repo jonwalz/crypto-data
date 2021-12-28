@@ -17,6 +17,7 @@ export const {
       blue600: '#397985',
       blue700: '#194850',
       blue800: '#0D2F36',
+      lightColor: '#f8f8ff'
     },
   },
 });
