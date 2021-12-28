@@ -1,5 +1,5 @@
 import { useQuery } from "urql";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Crypto } from "../Crypto";
 import { Input, Box } from "./styles";
 
@@ -20,8 +20,12 @@ export function Currencies() {
   // useQuery will make a POST request with CURRENCIES_EXAMPLE as the body
   const [result] = useQuery({ query: CURRENCIES_EXAMPLE });
   const [searchValue, setSearchValue] = useState("");
-
+  const [selected, setSelected] = useState(false);
   const [watchListItems, setWatchListItems] = useState([]);
+
+  useEffect(() => {
+    console.log("ITEMS NOW: ", watchListItems);
+  }, [watchListItems]);
 
   const { data, fetching, error } = result;
 
@@ -40,16 +44,31 @@ export function Currencies() {
         i={i}
         name={currency.name}
         symbol={currency.symbol}
-        handleWatchList={() => {
-          setWatchListItems((prevItem) => [...prevItem, currency.name]);
-          console.log("boh", watchListItems);
+        selected={selected}
+        setSelected={setSelected}
+        addToWatchList={() => {
+          setWatchListItems((prevItem) => [
+            ...prevItem,
+            { name: currency.name, price: currency.priceUsd },
+          ]);
+          console.log("watch list", watchListItems);
+        }}
+        removeFromWatchList={(name: string) => {
+          setWatchListItems((prevItems) =>
+            prevItems.filter((item) => item.name !== name)
+          );
         }}
       />
     );
   });
 
-  const watchListDisplay = watchListItems.map((item, i) => {
-    return <li key={i}>{item}</li>;
+  const watchListDisplay = watchListItems.map((item: any) => {
+    return (
+      <li key={item.id}>
+        <p>{`Name: ${item.name}`} </p>
+        <p>{`Price: ${item.price}`}</p>
+      </li>
+    );
   });
 
   const handleChange = (e) => {

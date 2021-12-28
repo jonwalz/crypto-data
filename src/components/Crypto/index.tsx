@@ -5,15 +5,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBinoculars } from "@fortawesome/free-solid-svg-icons";
 import { render } from "@testing-library/react";
 
-export function Crypto({ name, i, priceUsd, symbol, handleWatchList }) {
+export function Crypto(props) {
+  const { name, i, priceUsd, symbol, addToWatchList, removeFromWatchList } =
+    props;
+
   const [selected, setSelected] = useState(false);
+
   let firstLetterOfName = name.charAt(0);
 
-  const addToWatchList = (id) => {
-    if (id === i) {
-      setSelected(!selected);
-      handleWatchList();
-    }
+  const handleAddToWatchList = () => {
+    addToWatchList();
+  };
+  const handleRemoveFromWatchList = (name: string) => {
+    removeFromWatchList(name);
   };
 
   return (
@@ -40,7 +44,10 @@ export function Crypto({ name, i, priceUsd, symbol, handleWatchList }) {
       <FontAwesomeIcon
         icon={faBinoculars}
         className="binocularIcon"
-        onClick={() => addToWatchList(i)}
+        onClick={() => {
+          setSelected(!selected);
+          !selected ? handleAddToWatchList() : handleRemoveFromWatchList(name);
+        }}
       />
     </Li>
   );

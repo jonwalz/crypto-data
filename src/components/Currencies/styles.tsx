@@ -23,5 +23,5 @@ export const Input = styled("input", {
 export const Box = styled("div", {
   display: "flex",
   flexDirection: "row",
-  justifyContent: "space-evenly",
+  justifyContent: "space-between",
 });
