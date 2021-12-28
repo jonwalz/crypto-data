@@ -20,7 +20,6 @@ export function Currencies() {
   // useQuery will make a POST request with CURRENCIES_EXAMPLE as the body
   const [result] = useQuery({ query: CURRENCIES_EXAMPLE });
   const [searchValue, setSearchValue] = useState("");
-  const [selected, setSelected] = useState(false);
   const [watchListItems, setWatchListItems] = useState([]);
 
   useEffect(() => {
@@ -44,8 +43,6 @@ export function Currencies() {
         i={i}
         name={currency.name}
         symbol={currency.symbol}
-        selected={selected}
-        setSelected={setSelected}
         addToWatchList={() => {
           setWatchListItems((prevItem) => [
             ...prevItem,

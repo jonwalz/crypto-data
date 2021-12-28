@@ -38,7 +38,7 @@ export function Crypto(props) {
       <div>
         Price(USD): <span>{priceUsd || "N/A"}</span>
       </div>
-      <h1 style={{ opacity: ".5" }}>
+      <h1>
         <span>{firstLetterOfName}</span>
       </h1>
       <FontAwesomeIcon
