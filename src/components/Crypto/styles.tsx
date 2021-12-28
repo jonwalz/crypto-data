@@ -16,6 +16,9 @@ export const Li = styled("li", {
   "& *": {
     margin: "7px 0px 0px 7px",
   },
+  "& h1": {
+    opacity: ".5",
+  },
   "& .binocularIcon": {
     position: "absolute",
     top: "0",
