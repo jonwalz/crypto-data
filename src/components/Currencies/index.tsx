@@ -1,7 +1,7 @@
 import { useQuery } from "urql";
 import { useState } from "react";
 import { Crypto } from "../Crypto";
-import { Input } from "./styles";
+import { Input, Box } from "./styles";
 
 const CURRENCIES_EXAMPLE = `
   query {
@@ -21,6 +21,8 @@ export function Currencies() {
   const [result] = useQuery({ query: CURRENCIES_EXAMPLE });
   const [searchValue, setSearchValue] = useState("");
 
+  const [watchListItems, setWatchListItems] = useState([]);
+
   const { data, fetching, error } = result;
 
   // 'fetching' is a common pattern indicating a loading state
@@ -38,8 +40,16 @@ export function Currencies() {
         i={i}
         name={currency.name}
         symbol={currency.symbol}
+        handleWatchList={() => {
+          setWatchListItems((prevItem) => [...prevItem, currency.name]);
+          console.log("boh", watchListItems);
+        }}
       />
     );
+  });
+
+  const watchListDisplay = watchListItems.map((item, i) => {
+    return <li key={i}>{item}</li>;
   });
 
   const handleChange = (e) => {
@@ -55,10 +65,12 @@ export function Currencies() {
   return (
     <>
       <Input type="text" placeholder="SEARCH" onChange={handleChange} />
-
       <br />
       <br />
-      <ul>{filteredSearchCrypto}</ul>
+      <Box>
+        <ul>{filteredSearchCrypto}</ul>
+        <ul>{watchListDisplay}</ul>
+      </Box>
     </>
   );
 }

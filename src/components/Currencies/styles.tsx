@@ -19,3 +19,9 @@ export const Input = styled("input", {
   boxShadow: `0 0 0 1px ${blackA.blackA9}`,
   "&:focus": { boxShadow: `0 0 0 2px black` },
 });
+
+export const Box = styled("div", {
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "space-evenly",
+});
