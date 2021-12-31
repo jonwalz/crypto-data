@@ -1,5 +1,5 @@
 import { useQuery } from "urql";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Crypto } from "../Crypto";
 import { Input, Box } from "./styles";
 
@@ -22,39 +22,35 @@ export function Currencies() {
   const [searchValue, setSearchValue] = useState("");
   const [watchListItems, setWatchListItems] = useState([]);
 
-  useEffect(() => {
-    console.log("ITEMS NOW: ", watchListItems);
-  }, [watchListItems]);
-
   const { data, fetching, error } = result;
-
   // 'fetching' is a common pattern indicating a loading state
   if (fetching) return <div>Loading...</div>;
 
   if (error) return <div>Whoops, something bad happened...</div>;
 
-  // Check the console to see data shape
-  console.log("DATA: ", data.allCurrencyProjects);
+  const addToWatchList = (coin) => {
+    setWatchListItems((prevItem) => [
+      ...prevItem,
+      { name: coin.name, price: coin.priceUsd },
+    ]);
+  };
+
+  const removeFromWatchList = (name: string) => {
+    setWatchListItems((prevItems) =>
+      prevItems.filter((item) => item.name !== name)
+    );
+  };
+
   const crypto = data.allCurrencyProjects.map((currency, i) => {
     return (
       <Crypto
-        key={`${currency.name} ${i}`}
+        key={`${i}`}
         priceUsd={currency.priceUsd}
         i={i}
         name={currency.name}
         symbol={currency.symbol}
-        addToWatchList={() => {
-          setWatchListItems((prevItem) => [
-            ...prevItem,
-            { name: currency.name, price: currency.priceUsd },
-          ]);
-          console.log("watch list", watchListItems);
-        }}
-        removeFromWatchList={(name: string) => {
-          setWatchListItems((prevItems) =>
-            prevItems.filter((item) => item.name !== name)
-          );
-        }}
+        addToWatchList={() => addToWatchList(currency)}
+        removeFromWatchList={() => removeFromWatchList(currency.name)}
       />
     );
   });

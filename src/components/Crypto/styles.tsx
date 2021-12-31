@@ -25,6 +25,7 @@ export const Li = styled("li", {
     right: "0",
     "&:hover": {
       color: theme.colors.lightColor,
+      opacity: "1",
       cursor: "pointer",
     },
   },
