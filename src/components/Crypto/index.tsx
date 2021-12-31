@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBinoculars } from "@fortawesome/free-solid-svg-icons";
 import { render } from "@testing-library/react";
 
-export function Crypto(props) {
+export function Crypto(props: any) {
   const { name, i, priceUsd, symbol, addToWatchList, removeFromWatchList } =
     props;
 
@@ -13,22 +13,19 @@ export function Crypto(props) {
 
   let firstLetterOfName = name.charAt(0);
 
-  const handleAddToWatchList = () => {
-    addToWatchList();
+  const conditionalStyles = {
+    "& .binocularIcon": {
+      color: selected ? theme.colors.lightColor : "inherit",
+      opacity: selected ? "1" : ".5",
+    },
   };
-  const handleRemoveFromWatchList = (name: string) => {
-    removeFromWatchList(name);
+  const handleAddRemoveClick = (name: String) => {
+    setSelected(!selected);
+    !selected ? addToWatchList() : removeFromWatchList(name);
   };
 
   return (
-    <Li
-      key={`${name} ${i}`}
-      css={{
-        "& .binocularIcon": {
-          color: selected ? theme.colors.lightColor : "inherit",
-        },
-      }}
-    >
+    <Li key={`${name} ${i}`} css={conditionalStyles}>
       <div>
         Name: <span>{name}</span>
       </div>
@@ -44,10 +41,7 @@ export function Crypto(props) {
       <FontAwesomeIcon
         icon={faBinoculars}
         className="binocularIcon"
-        onClick={() => {
-          setSelected(!selected);
-          !selected ? handleAddToWatchList() : handleRemoveFromWatchList(name);
-        }}
+        onClick={() => handleAddRemoveClick(name)}
       />
     </Li>
   );
