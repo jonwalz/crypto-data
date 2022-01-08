@@ -23,6 +23,7 @@ export function Currencies() {
   const [watchListItems, setWatchListItems] = useState([]);
 
   const { data, fetching, error } = result;
+
   // 'fetching' is a common pattern indicating a loading state
   if (fetching) return <div>Loading...</div>;
 
@@ -46,6 +47,8 @@ export function Currencies() {
       <Crypto
         key={`${i}`}
         priceUsd={currency.priceUsd}
+        volumeChange24h={currency.volumeChange24h}
+        marketcapUsd={currency.marketcapUsd}
         i={i}
         name={currency.name}
         symbol={currency.symbol}
