@@ -17,7 +17,13 @@ export const {
       blue600: '#397985',
       blue700: '#194850',
       blue800: '#0D2F36',
-      lightColor: '#f8f8ff'
+      selectedColor: '#f8f8ff',
+      cyan: '#00FFFF',
+      green: '#DC143C',
+      red: '#00FF7F'
     },
+    fontSizes: {
+      icon : '1.25em'
+    }
   },
 });
