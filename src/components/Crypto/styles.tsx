@@ -6,7 +6,7 @@ export const Li = styled("li", {
   margin: "20px 0px 0px 0px",
   borderRadius: "15px",
   padding: "12px",
-  width: "50vw",
+  width: "35vw",
   borderBottom: "solid 1px",
   borderLeft: "solid 1px",
   listStyleType: "none",
@@ -15,7 +15,7 @@ export const Li = styled("li", {
       height: "200",
       opacity: "1",
       display: "inline-block",
-      transform: "translate(y)",
+      // transform: "translate(y)",
     },
     cursor: "pointer",
   },
@@ -47,7 +47,6 @@ export const Li = styled("li", {
     height: "0",
     opacity: "0",
     width: "100%",
-
     transition: "all .2s ease",
   },
   "@media (max-width: 600px)": {
