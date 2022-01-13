@@ -21,21 +21,21 @@ export function Crypto(props: any) {
 
   let firstLetterOfName = name.charAt(0).toUpperCase();
 
-  //a little bit of styling logic
-  const calculateVolumeColor = () => {
+  //a little bit of volume % styling logic
+  const calculateVolumeChangeColor = () => {
     if (Math.sign(volumeChange24h) > -1) return theme.colors.red;
-    if (volumeChange24h === null) return "inherit";
+    if (!volumeChange24h) return "inherit";
     return theme.colors.green;
   };
 
-  //this is passed into the stitches built in css prop
+  //this is passed into the stitches built-in css prop
   const conditionalStyles = {
     "& .binocularIcon": {
       color: selected ? theme.colors.selectedColor : "inherit",
       opacity: selected ? "1" : ".5",
     },
     "& .cryptoVolume": {
-      color: calculateVolumeColor(),
+      color: calculateVolumeChangeColor(),
     },
   };
 
