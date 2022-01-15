@@ -1,36 +1,46 @@
-import { createClient, Provider } from "urql";
-import { Currencies } from "./components/Currencies";
-import { globalCss, theme } from "./stitches.config";
+import { createClient, Provider } from 'urql'
+import { globalCss } from './stitches.config'
+import 'normalize.css'
 
-import "./App.css";
+import './App.css'
+import { Navbar } from './components/Navbar'
+import Main from './components/Main'
+import { useStore } from './store'
+import { useEffect } from 'react'
 
 export const santimentClient = createClient({
-  url: "https://api.santiment.net/graphql",
-});
+  url: 'https://api.santiment.net/graphql',
+})
 
 const globalStyles = globalCss({
   body: {
     margin: 0,
-    background: theme.colors.blue800,
-    color: theme.colors.blue500,
+    background: '$blue700',
+    color: '$blue500',
     fontFamily: `-apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif`
+    sans-serif`,
   },
   code: {
     fontFamily: `source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace`,
-  }
+  },
 })
 
 function App() {
-  globalStyles();
+  globalStyles()
+
+  // fetch currencies on mount
+  const fetchCurrencies = useStore((state) => state.fetchCurrencies)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => fetchCurrencies(), [])
 
   return (
     <Provider value={santimentClient}>
-      <Currencies />
+      <Navbar />
+      <Main />
     </Provider>
-  );
+  )
 }
 
-export default App;
+export default App
