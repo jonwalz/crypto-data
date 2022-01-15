@@ -1,6 +1,6 @@
 import React from 'react'
 import { useStore } from '../../store'
-import { CryptoCard } from '../Crypto'
+import { CryptoCard } from '../CryptoCard'
 import { SearchResultsWrapper } from './styles'
 
 interface SearchResultsProps {}

@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react'
-import { CryptoCard } from './'
+import { CryptoCard } from '.'
 
 const props = {
   name: 'Test name',
