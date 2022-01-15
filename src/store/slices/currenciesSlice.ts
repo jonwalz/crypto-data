@@ -29,13 +29,11 @@ export const currenciesSlice: STORE_SLICE<CURRENCIES_SLICE> = (set, get) => ({
   },
   filteredCurrencies: () => {
     const currencies = get().currencies
-    console.log('CURRENCIES: ', currencies)
     const searchInput = get().value
     const filteredCurrencies = search(searchInput, currencies, {
       keySelector: (obj) => obj.name,
     })
 
-    console.log('FILTERED: ', filteredCurrencies)
     return filteredCurrencies
   },
 })
