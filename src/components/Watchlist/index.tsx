@@ -10,8 +10,8 @@ const Watchlist: React.FC<WatchlistProps> = () => {
     <WatchlistWrapper>
       Watchlist:{' '}
       <ul>
-        {watchlist.map((item) => (
-          <li>{item}</li>
+        {watchlist.map((item, i) => (
+          <li key={i}>{item}</li>
         ))}
       </ul>
     </WatchlistWrapper>

@@ -16,7 +16,7 @@ const SearchResults: React.FC<SearchResultsProps> = () => {
       {filteredCurrencies.map((currency, i) => {
         return (
           <CryptoCard
-            key={`${i}`}
+            key={i}
             priceUsd={currency.priceUsd}
             volumeChange24h={currency.volumeChange24h}
             marketcapUsd={currency.marketcapUsd}
