@@ -1,11 +1,10 @@
-import { useState } from "react";
-import { Li } from "./styles";
-import { theme } from "../../stitches.config";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBinoculars } from "@fortawesome/free-solid-svg-icons";
-import { render } from "@testing-library/react";
+import { useState } from 'react'
+import { Li } from './styles'
+import { theme } from '../../stitches.config'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBinoculars } from '@fortawesome/free-solid-svg-icons'
 
-export function Crypto(props: any) {
+export function CryptoCard(props: any) {
   const {
     name,
     i,
@@ -15,34 +14,34 @@ export function Crypto(props: any) {
     removeFromWatchList,
     marketcapUsd,
     volumeChange24h,
-  } = props;
+  } = props
 
-  const [selected, setSelected] = useState(false);
+  const [selected, setSelected] = useState(false)
 
-  let firstLetterOfName = name.charAt(0).toUpperCase();
+  let firstLetterOfName = name.charAt(0).toUpperCase()
 
   //a little bit of volume % styling logic
   const calculateVolumeChangeColor = () => {
-    if (Math.sign(volumeChange24h) > -1) return theme.colors.red;
-    if (!volumeChange24h) return "inherit";
-    return theme.colors.green;
-  };
+    if (Math.sign(volumeChange24h) > -1) return theme.colors.red
+    if (!volumeChange24h) return 'inherit'
+    return theme.colors.green
+  }
 
   //this is passed into the stitches built-in css prop
   const conditionalStyles = {
-    "& .binocularIcon": {
-      color: selected ? theme.colors.selectedColor : "inherit",
-      opacity: selected ? "1" : ".5",
+    '& .binocularIcon': {
+      color: selected ? '$white100' : 'inherit',
+      opacity: selected ? '1' : '.5',
     },
-    "& .cryptoVolume": {
+    '& .cryptoVolume': {
       color: calculateVolumeChangeColor(),
     },
-  };
+  }
 
   const handleAddRemoveClick = (name: String) => {
-    setSelected(!selected);
-    !selected ? addToWatchList() : removeFromWatchList(name);
-  };
+    setSelected(!selected)
+    !selected ? addToWatchList() : removeFromWatchList(name)
+  }
 
   return (
     <Li key={`${name} ${i}`} css={conditionalStyles}>
@@ -50,20 +49,20 @@ export function Crypto(props: any) {
         Name: <span className="cryptoName">{name}</span>
       </div>
       <div>
-        Price(USD): <span>{priceUsd || "N/A"}</span>
+        Price(USD): <span>{priceUsd || 'N/A'}</span>
       </div>
       <div className="cryptoHiddenInfo">
         <div>
-          Market Cap(USD): <span>{marketcapUsd || "N/A"}</span>
+          Market Cap(USD): <span>{marketcapUsd || 'N/A'}</span>
         </div>
         <div>
-          Volume Change (24hrs):{" "}
+          Volume Change (24hrs):{' '}
           <span className="cryptoVolume">
-            {volumeChange24h !== null ? `${volumeChange24h}%` : "N/A"}
+            {volumeChange24h !== null ? `${volumeChange24h}%` : 'N/A'}
           </span>
         </div>
         <div>
-          Symbol: <span>{symbol || "N/A"}</span>
+          Symbol: <span>{symbol || 'N/A'}</span>
         </div>
       </div>
       <h1>
@@ -75,5 +74,5 @@ export function Crypto(props: any) {
         onClick={() => handleAddRemoveClick(name)}
       />
     </Li>
-  );
+  )
 }

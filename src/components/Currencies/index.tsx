@@ -1,91 +1,31 @@
-import { useQuery } from "urql";
-import { useState } from "react";
-import { Crypto } from "../Crypto";
-import { Input, Box } from "./styles";
-
-const CURRENCIES_EXAMPLE = `
-  query {
-    allCurrencyProjects(page: 1) {
-      symbol
-      ticker
-      name
-      priceUsd
-      volumeChange24h
-      marketcapUsd
-    }
-  }
-`;
+import { useEffect } from 'react'
+import { Box } from './styles'
+import { useStore } from '../../store'
 
 export function Currencies() {
-  // useQuery will make a POST request with CURRENCIES_EXAMPLE as the body
-  const [result] = useQuery({ query: CURRENCIES_EXAMPLE });
-  const [searchValue, setSearchValue] = useState("");
-  const [watchListItems, setWatchListItems] = useState([]);
+  // fetch currencies on mount
+  const fetchCurrencies = useStore((state) => state.fetchCurrencies)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => fetchCurrencies(), [])
 
-  const { data, fetching, error } = result;
+  const currencies = useStore((state) => state.currencies)
+  const watchlistItems = useStore((state) => state.watchlist)
 
-  // 'fetching' is a common pattern indicating a loading state
-  if (fetching) return <div>Loading...</div>;
-
-  if (error) return <div>Whoops, something bad happened...</div>;
-
-  const addToWatchList = (coin) => {
-    setWatchListItems((prevItem) => [
-      ...prevItem,
-      { name: coin.name, price: coin.priceUsd },
-    ]);
-  };
-
-  const removeFromWatchList = (name: string) => {
-    setWatchListItems((prevItems) =>
-      prevItems.filter((item) => item.name !== name)
-    );
-  };
-
-  const crypto = data.allCurrencyProjects.map((currency, i) => {
-    return (
-      <Crypto
-        key={`${i}`}
-        priceUsd={currency.priceUsd}
-        volumeChange24h={currency.volumeChange24h}
-        marketcapUsd={currency.marketcapUsd}
-        i={i}
-        name={currency.name}
-        symbol={currency.symbol}
-        addToWatchList={() => addToWatchList(currency)}
-        removeFromWatchList={() => removeFromWatchList(currency.name)}
-      />
-    );
-  });
-
-  const watchListDisplay = watchListItems.map((item: any) => {
+  const watchListDisplay = watchlistItems.map((id: string) => {
+    const item = currencies.find((currency) => currency.id === id)
     return (
       <li key={item.id}>
         <p>{`Name: ${item.name}`} </p>
-        <p>{`Price: ${item.price}`}</p>
+        <p>{`Price: ${item.priceUsd}`}</p>
       </li>
-    );
-  });
-
-  const handleChange = (e) => {
-    setSearchValue((prevValue) => e.target.value);
-  };
-
-  const filteredSearchCrypto = crypto.filter(({ props }) =>
-    searchValue !== ""
-      ? props.name.toLowerCase().includes(searchValue.toLowerCase())
-      : true
-  );
+    )
+  })
 
   return (
     <>
-      <Input type="text" placeholder="SEARCH" onChange={handleChange} />
-      <br />
-      <br />
       <Box>
-        <ul>{filteredSearchCrypto}</ul>
         <ul>{watchListDisplay}</ul>
       </Box>
     </>
-  );
+  )
 }
