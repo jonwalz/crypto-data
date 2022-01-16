@@ -1,6 +1,8 @@
 import axios from 'axios'
-import { ALL_CURRENCIES } from './queries'
+import { CURRENCIES_RESPONSE, CURRENCY_DETAIL_RESPONSE } from './constants'
+import { ALL_CURRENCIES_QUERY, CURRENCY_DETAILS_QUERY } from './queries'
 
+// Go to the endpoint URL to view the explorer
 const ENDPOINT = 'https://api.santiment.net/graphql'
 const headers = {
   'content-type': 'application/json',
@@ -11,17 +13,13 @@ const client = axios.create({
   headers,
 })
 
-type RESPONSE = {
-  data: any
-}
-
 export async function fetchCurrencies() {
   const graphqlQuery = {
-    query: ALL_CURRENCIES,
+    query: ALL_CURRENCIES_QUERY,
   }
 
   try {
-    const response: RESPONSE = await client({
+    const response: CURRENCIES_RESPONSE = await client({
       method: 'post',
       data: graphqlQuery,
     })
@@ -30,5 +28,28 @@ export async function fetchCurrencies() {
   } catch (e) {
     new Error(e)
     return []
+  }
+}
+
+export async function fetchCurrencyDetails(id) {
+  const variables = {
+    currencyId: id,
+  }
+
+  try {
+    const response: CURRENCY_DETAIL_RESPONSE = await client({
+      method: 'post',
+      data: {
+        query: CURRENCY_DETAILS_QUERY,
+        variables,
+      },
+    })
+
+    console.log('Single resp: ', response.data.data.project)
+
+    return response.data.data.project
+  } catch (e) {
+    new Error(e)
+    return {} as CURRENCY_DETAIL_RESPONSE['data']['data']['project']
   }
 }
