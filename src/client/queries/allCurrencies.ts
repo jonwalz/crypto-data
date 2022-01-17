@@ -1,4 +1,4 @@
-export const ALL_CURRENCIES = `
+export const ALL_CURRENCIES_QUERY = `
   query {
     allProjects {
       symbol
