@@ -1,10 +1,11 @@
 import { createClient, Provider } from 'urql'
+import Routes from './routes'
 import { globalCss } from './stitches.config'
 import 'normalize.css'
 
 import './App.css'
-import { Navbar } from './components/Navbar'
-import Main from './components/Main'
+// import { Navbar } from './components/Navbar'
+// import Main from './components/Main'
 import { useStore } from './store'
 import { useEffect } from 'react'
 
@@ -37,8 +38,7 @@ function App() {
 
   return (
     <Provider value={santimentClient}>
-      <Navbar />
-      <Main />
+      <Routes />
     </Provider>
   )
 }
