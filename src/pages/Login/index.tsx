@@ -7,6 +7,7 @@ interface LoginProps {
 }
 
 const Login: React.FC<LoginProps> = () => {
+  //todo: create inputs and form validation (custom hook?)
   return (
     <LoginWrapper>
       <Input type="email" placeholder="Enter Email" />
