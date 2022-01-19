@@ -1,6 +1,6 @@
 import React from 'react'
 import { LoginWrapper } from './styles'
-import { Input } from '../../components/SearchInput/styles'
+import { Input } from './styles'
 
 interface LoginProps {
   path: String
