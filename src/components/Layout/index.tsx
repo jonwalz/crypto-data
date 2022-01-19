@@ -3,7 +3,9 @@ import Main from '../Main'
 import { Navbar } from '../Navbar'
 import { LayoutWrapper } from './styles'
 
-interface LayoutProps {}
+interface LayoutProps {
+  path: String
+}
 
 const Layout: React.FC<LayoutProps> = () => {
   return (
