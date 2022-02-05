@@ -50,3 +50,19 @@ $ netlify deploy
 # production deployment
 $ netlify deploy --prod
 ```
+
+ ## Setting up Prisma for local development
+
+ https://www.prisma.io/docs/getting-started/setup-prisma/start-from-scratch/relational-databases-typescript-postgres
+
+### To seed the database
+ npm run seed
+
+### To see Prisma studio
+npx prisma studio
+
+
+### Chakra-ui resources
+
+https://chakra-ui.com/
+https://chakra-templates.dev/
