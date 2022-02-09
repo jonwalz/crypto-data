@@ -33,7 +33,7 @@ const Nav = () => {
             fontFamily={"heading"}
             color={useColorModeValue("gray.800", "white")}
           >
-            Logo
+            Dig
           </Text>
 
           <Flex display={{ base: "none", md: "flex" }} ml={10}>

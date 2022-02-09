@@ -26,8 +26,10 @@ interface LinkItemProps {
   href: string;
 }
 const LinkItems: Array<LinkItemProps> = [
-  { name: "Search", href: "/search" },
+  { name: "Screener", href: "/screener" },
   { name: "Watchlist", href: "/watchlist" },
+  { name: "Alerts", href: "/alerts" },
+  { name: "Details", href: "/details" },
 ];
 
 export default function SidebarWithHeader({
@@ -37,7 +39,7 @@ export default function SidebarWithHeader({
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
-    <Box minH="100vh" bg="blue.400">
+    <Box minH="100vh" bg="green.900">
       <SidebarContent
         onClose={() => onClose}
         display={{ base: "none", md: "block" }}
@@ -72,9 +74,9 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
   return (
     <Box
       transition="3s ease"
-      bg={"blue.400"}
+      bg={"green.900"}
       borderRight="1px"
-      borderRightColor="blue.600"
+      borderRightColor="green.800"
       w={{ base: "full", md: 60 }}
       pos="fixed"
       h="full"
@@ -82,7 +84,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
     >
       <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
         <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
-          Logo
+          Dig
         </Text>
         <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
       </Flex>
@@ -114,7 +116,7 @@ const NavItem = ({ children, href, ...rest }: NavItemProps) => {
         role="group"
         cursor="pointer"
         _hover={{
-          bg: "blue.500",
+          bg: "green.800",
           color: "white",
         }}
         {...rest}
@@ -135,9 +137,9 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
       px={{ base: 4, md: 4 }}
       height="20"
       alignItems="center"
-      bg={"blue.400"}
+      bg={"green.900"}
       borderBottomWidth="1px"
-      borderBottomColor={"blue.500"}
+      borderBottomColor={"green.800"}
       justifyContent={{ base: "space-between", md: "flex-end" }}
       {...rest}
     >
@@ -155,7 +157,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
         fontFamily="monospace"
         fontWeight="bold"
       >
-        Logo
+        Dig
       </Text>
 
       <HStack spacing={{ base: "0", md: "6" }}>
@@ -186,7 +188,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
                   ml="2"
                 >
                   <Text fontSize="sm">Justina Clark</Text>
-                  <Text fontSize="xs" color="blue.300">
+                  <Text fontSize="xs" color="green.300">
                     Admin
                   </Text>
                 </VStack>
@@ -195,12 +197,12 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
                 </Box>
               </HStack>
             </MenuButton>
-            <MenuList bg="blue.500" borderColor="gray.200">
+            <MenuList bg="green.800" borderColor="gray.200">
               {["Profile", "Settings", "Billing", "Sign out"].map((name, i) => (
                 <MenuItem
                   key={i}
                   _hover={{
-                    bg: "blue.600",
+                    bg: "green.800",
                     color: "white",
                   }}
                 >
