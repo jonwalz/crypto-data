@@ -7,8 +7,8 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import { Form, json, useActionData, useSubmit, useTransition } from "remix";
-import { nomicsFetchCurrencies } from "~/client/nomics/nomics";
-import { santimentFetchCurrencies } from "~/client/santiment";
+import { nomicsFetchCurrencies } from "~/sever/nomics/nomics";
+import { santimentFetchCurrencies } from "~/sever/santiment";
 import { CryptoSummary } from "~/components/CryptoSummary";
 import { CryptoItem } from "~/components/CryptoSummary/types";
 import { searchData } from "./utils";
