@@ -1,6 +1,14 @@
-import { Box, Input, Spinner } from "@chakra-ui/react";
+import {
+  Box,
+  Input,
+  Radio,
+  RadioGroup,
+  Spinner,
+  Stack,
+} from "@chakra-ui/react";
 import { Form, json, useActionData, useSubmit, useTransition } from "remix";
-import { fetchCurrencies } from "~/client";
+import { nomicsFetchCurrencies } from "~/client/nomics/nomics";
+import { santimentFetchCurrencies } from "~/client/santiment";
 import { CryptoSummary } from "~/components/CryptoSummary";
 import { CryptoItem } from "~/components/CryptoSummary/types";
 import { searchData } from "./utils";
@@ -12,18 +20,25 @@ export async function loader() {
 export async function action({ request }) {
   const result = await request.formData();
   const searchString = result.get("crypto-search");
+  const dataSourceSelection = result.get("data-source");
 
   if (!searchString) return null;
 
-  const data = await fetchCurrencies();
+  const dataSource = {
+    santiment: santimentFetchCurrencies,
+    nomics: nomicsFetchCurrencies,
+  }[dataSourceSelection];
 
-  return json(searchData(searchString, data.data.allProjects));
+  const data = await dataSource();
+
+  return json(searchData(searchString, data));
 }
 
 // https://remix.run/docs/en/v1/api/remix#usesubmit
 export default () => {
   const submit = useSubmit();
   const data = useActionData();
+  console.log("FE Data: ", data);
   const transition = useTransition();
 
   const handleChange = (event) => {
@@ -33,6 +48,18 @@ export default () => {
   return (
     <>
       <Form method="post" onChange={handleChange}>
+        <RadioGroup
+          name="data-source"
+          defaultValue="santiment"
+          mb="2"
+          px="4"
+          py="2"
+        >
+          <Stack direction="row">
+            <Radio value="santiment">Santiment</Radio>
+            <Radio value="nomics">Nomics</Radio>
+          </Stack>
+        </RadioGroup>
         <Input
           name="crypto-search"
           type="text"
@@ -45,7 +72,10 @@ export default () => {
         {["loading", "submitting"].includes(transition.state) ? (
           <Spinner size="lg" />
         ) : (
-          data && data.map((item: CryptoItem) => <CryptoSummary item={item} />)
+          data &&
+          data.map((item: CryptoItem) => (
+            <CryptoSummary item={item} key={item.refIndex} />
+          ))
         )}
       </Box>
     </>

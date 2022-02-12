@@ -13,7 +13,7 @@ const client = axios.create({
   headers,
 });
 
-export async function fetchCurrencies() {
+export async function santimentFetchCurrencies() {
   const graphqlQuery = {
     query: ALL_CURRENCIES_QUERY,
   };
@@ -24,7 +24,7 @@ export async function fetchCurrencies() {
       graphqlQuery
     );
 
-    return response.data;
+    return response.data.data.allProjects;
   } catch (e) {
     new Error(e);
     return [];

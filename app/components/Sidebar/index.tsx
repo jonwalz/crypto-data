@@ -57,7 +57,6 @@ export default function SidebarWithHeader({
           <SidebarContent onClose={onClose} />
         </DrawerContent>
       </Drawer>
-      {/* mobilenav */}
       <MobileNav onOpen={onOpen} />
       <Box ml={{ base: 0, md: 60 }} p="4">
         {children}
@@ -82,7 +81,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
       h="full"
       {...rest}
     >
-      <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
+      <Flex h="20" alignItems="center" mx="6" justifyContent="space-between">
         <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
           Dig
         </Text>
@@ -110,9 +109,10 @@ const NavItem = ({ children, href, ...rest }: NavItemProps) => {
     >
       <Flex
         align="center"
-        p="4"
+        p="2"
+        px="3"
         mx="4"
-        borderRadius="lg"
+        borderRadius="sm"
         role="group"
         cursor="pointer"
         _hover={{
@@ -130,6 +130,7 @@ const NavItem = ({ children, href, ...rest }: NavItemProps) => {
 interface MobileProps extends FlexProps {
   onOpen: () => void;
 }
+
 const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
   return (
     <Flex
@@ -175,12 +176,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
               _focus={{ boxShadow: "none" }}
             >
               <HStack>
-                <Avatar
-                  size={"sm"}
-                  src={
-                    "https://images.unsplash.com/photo-1619946794135-5bc917a27793?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9"
-                  }
-                />
+                <Avatar size={"sm"} />
                 <VStack
                   display={{ base: "none", md: "flex" }}
                   alignItems="flex-start"
@@ -201,8 +197,12 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
               {["Profile", "Settings", "Billing", "Sign out"].map((name, i) => (
                 <MenuItem
                   key={i}
+                  _focus={{
+                    bg: "green.700",
+                    color: "white",
+                  }}
                   _hover={{
-                    bg: "green.800",
+                    bg: "green.700",
                     color: "white",
                   }}
                 >

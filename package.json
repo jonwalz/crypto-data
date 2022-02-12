@@ -20,6 +20,7 @@
     "axios": "^0.25.0",
     "fuse.js": "^6.5.3",
     "import": "^0.0.6",
+    "nomics": "^0.5.7",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-icons": "^4.3.1",

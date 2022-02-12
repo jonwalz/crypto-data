@@ -17,7 +17,7 @@ const colors = {
 
 const global = {
   body: {
-    color: "green.300",
+    color: "green.100",
   },
 };
 

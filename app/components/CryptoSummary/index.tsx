@@ -2,11 +2,25 @@ import { Box } from "@chakra-ui/react";
 import { CryptoSummaryProps } from "./types";
 
 export const CryptoSummary: React.FC<CryptoSummaryProps> = ({ item }) => {
-  const { id, name, ticker } = item.item;
+  const {
+    item: { id, name, ticker },
+  } = item;
 
   return (
-    <Box key={id} m={2} display="flex">
-      <Box fontSize="l">{name}</Box>
+    <Box
+      p={2}
+      borderRadius="md"
+      display="flex"
+      alignItems="flex-end"
+      cursor="pointer"
+      _hover={{
+        bg: "green.800",
+        color: "white",
+      }}
+    >
+      <Box fontSize="l" pr="2">
+        {name}
+      </Box>
       <Box fontSize="sm" color="gray.500">
         {ticker}
       </Box>
