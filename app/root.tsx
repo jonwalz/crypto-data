@@ -14,7 +14,7 @@ import { theme } from "./theme";
 
 function Document({
   children,
-  title = "App title",
+  title = "Crypto Alerts",
 }: {
   children: React.ReactNode;
   title?: string;

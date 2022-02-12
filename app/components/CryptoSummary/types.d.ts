@@ -1,4 +1,5 @@
 export interface CryptoItem {
+  refIndex: string;
   item: {
     id: string;
     name: string;
