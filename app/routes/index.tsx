@@ -1,4 +1,4 @@
-import { Outlet, useLoaderData } from "remix";
+import { Outlet } from "remix";
 
 export default function Index() {
   return <Outlet />;

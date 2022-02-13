@@ -1,4 +1,5 @@
 import { Box } from "@chakra-ui/react";
+import { Link } from "remix";
 import { CryptoSummaryProps } from "./types";
 
 export const CryptoSummary: React.FC<CryptoSummaryProps> = ({ item }) => {
@@ -7,23 +8,25 @@ export const CryptoSummary: React.FC<CryptoSummaryProps> = ({ item }) => {
   } = item;
 
   return (
-    <Box
-      p={2}
-      borderRadius="md"
-      display="flex"
-      alignItems="flex-end"
-      cursor="pointer"
-      _hover={{
-        bg: "green.800",
-        color: "white",
-      }}
-    >
-      <Box fontSize="l" pr="2">
-        {name}
+    <Link to={`/details/${ticker}`}>
+      <Box
+        p={2}
+        borderRadius="md"
+        display="flex"
+        alignItems="flex-end"
+        cursor="pointer"
+        _hover={{
+          bg: "green.800",
+          color: "white",
+        }}
+      >
+        <Box fontSize="l" pr="2">
+          {name}
+        </Box>
+        <Box fontSize="sm" color="gray.500">
+          {ticker}
+        </Box>
       </Box>
-      <Box fontSize="sm" color="gray.500">
-        {ticker}
-      </Box>
-    </Box>
+    </Link>
   );
 };

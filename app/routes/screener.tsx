@@ -1,5 +1,6 @@
 import {
   Box,
+  Flex,
   Input,
   Radio,
   RadioGroup,
@@ -7,8 +8,8 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import { Form, json, useActionData, useSubmit, useTransition } from "remix";
-import { nomicsFetchCurrencies } from "~/sever/nomics/nomics";
-import { santimentFetchCurrencies } from "~/sever/santiment";
+import { nomicsFetchCurrencies } from "~/server/nomics/nomics";
+import { santimentFetchCurrencies } from "~/server/santiment";
 import { CryptoSummary } from "~/components/CryptoSummary";
 import { CryptoItem } from "~/components/CryptoSummary/types";
 import { searchData } from "./utils";
@@ -38,7 +39,6 @@ export async function action({ request }) {
 export default () => {
   const submit = useSubmit();
   const data = useActionData();
-  console.log("FE Data: ", data);
   const transition = useTransition();
 
   const handleChange = (event) => {
@@ -46,15 +46,9 @@ export default () => {
   };
 
   return (
-    <>
+    <Flex flexDir="column" px="3">
       <Form method="post" onChange={handleChange}>
-        <RadioGroup
-          name="data-source"
-          defaultValue="santiment"
-          mb="2"
-          px="4"
-          py="2"
-        >
+        <RadioGroup name="data-source" defaultValue="santiment" mb="2" py="2">
           <Stack direction="row">
             <Radio value="santiment">Santiment</Radio>
             <Radio value="nomics">Nomics</Radio>
@@ -78,6 +72,6 @@ export default () => {
           ))
         )}
       </Box>
-    </>
+    </Flex>
   );
 };
