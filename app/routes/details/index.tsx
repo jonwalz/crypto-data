@@ -1,1 +1,7 @@
-export default () => <div>details</div>;
+import Layout from '~/components/Layout'
+
+export default () => (
+  <Layout>
+    <div>details</div>
+  </Layout>
+)
