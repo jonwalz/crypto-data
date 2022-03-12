@@ -10,6 +10,7 @@
     "seed": "prisma db push && node prisma/seed.js"
   },
   "dependencies": {
+    "@babel/core": "^7.17.5",
     "@chakra-ui/icons": "^1.1.1",
     "@chakra-ui/react": "^1.8.1",
     "@emotion/react": "^11.9.3",
