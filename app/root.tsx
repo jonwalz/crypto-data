@@ -9,8 +9,11 @@ import {
 } from 'remix'
 
 import { ChakraProvider, Box, Heading } from '@chakra-ui/react'
-import Layout from './components/Layout'
 import { theme } from './theme'
+
+export const action = () => {
+  return null
+}
 
 function Document({
   children,
@@ -27,6 +30,7 @@ function Document({
         <Meta />
         <title>{title}</title>
         <Links />
+        <script> var global = global || window; </script>
       </head>
       <body>
         {children}
@@ -39,14 +43,10 @@ function Document({
 }
 
 export default function App() {
-  // throw new Error("💣💥 Booooom");
-
   return (
     <Document>
       <ChakraProvider theme={theme}>
-        <Layout>
-          <Outlet />
-        </Layout>
+        <Outlet />
       </ChakraProvider>
     </Document>
   )
