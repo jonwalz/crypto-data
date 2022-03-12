@@ -1,5 +1,12 @@
-import { Outlet } from "remix";
+import { redirect, LoaderFunction } from 'remix'
+import { getUser } from '~/session.server'
 
-export default function Index() {
-  return <Outlet />;
+export const loader: LoaderFunction = async ({ request }) => {
+  const user = await getUser(request)
+
+  if (user) {
+    return redirect('screener')
+  }
+
+  return redirect('sign-in')
 }

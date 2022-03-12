@@ -6,18 +6,21 @@ import {
   Scripts,
   ScrollRestoration,
   useCatch,
-} from "remix";
+} from 'remix'
 
-import { ChakraProvider, Box, Heading } from "@chakra-ui/react";
-import Layout from "./components/Layout";
-import { theme } from "./theme";
+import { ChakraProvider, Box, Heading } from '@chakra-ui/react'
+import { theme } from './theme'
+
+export const action = () => {
+  return null
+}
 
 function Document({
   children,
-  title = "Crypto Alerts",
+  title = 'Crypto Alerts',
 }: {
-  children: React.ReactNode;
-  title?: string;
+  children: React.ReactNode
+  title?: string
 }) {
   return (
     <html lang="en">
@@ -27,6 +30,7 @@ function Document({
         <Meta />
         <title>{title}</title>
         <Links />
+        <script> var global = global || window; </script>
       </head>
       <body>
         {children}
@@ -35,26 +39,22 @@ function Document({
         <LiveReload />
       </body>
     </html>
-  );
+  )
 }
 
 export default function App() {
-  // throw new Error("💣💥 Booooom");
-
   return (
     <Document>
       <ChakraProvider theme={theme}>
-        <Layout>
-          <Outlet />
-        </Layout>
+        <Outlet />
       </ChakraProvider>
     </Document>
-  );
+  )
 }
 
 // How ChakraProvider should be used on CatchBoundary
 export function CatchBoundary() {
-  const caught = useCatch();
+  const caught = useCatch()
 
   return (
     <Document title={`${caught.status} ${caught.statusText}`}>
@@ -66,7 +66,7 @@ export function CatchBoundary() {
         </Box>
       </ChakraProvider>
     </Document>
-  );
+  )
 }
 
 // How ChakraProvider should be used on ErrorBoundary
@@ -81,5 +81,5 @@ export function ErrorBoundary({ error }: { error: Error }) {
         </Box>
       </ChakraProvider>
     </Document>
-  );
+  )
 }
