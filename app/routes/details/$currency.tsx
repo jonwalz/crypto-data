@@ -22,9 +22,5 @@ export const loader: LoaderFunction = async ({ params }) => {
 export default () => {
   const currencyDetails = useLoaderData<CurrencyDetailCardProps>()
 
-  return (
-    <Layout>
-      <CurrencyDetailCard {...currencyDetails} />
-    </Layout>
-  )
+  return <CurrencyDetailCard {...currencyDetails} />
 }

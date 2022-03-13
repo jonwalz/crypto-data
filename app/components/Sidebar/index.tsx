@@ -1,5 +1,4 @@
 import {
-  IconButton,
   Avatar,
   Box,
   CloseButton,
@@ -17,9 +16,9 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
+  Button,
 } from '@chakra-ui/react'
 import { FC } from 'react'
-import { FiMenu, FiChevronDown } from 'react-icons/fi'
 import { NavLink as RemixLink } from 'remix'
 
 interface LinkItemProps {
@@ -148,12 +147,11 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
       justifyContent={{ base: 'space-between', md: 'flex-end' }}
       {...rest}
     >
-      <IconButton
+      <Button
         display={{ base: 'flex', md: 'none' }}
         onClick={onOpen}
         variant="outline"
         aria-label="open menu"
-        icon={<FiMenu />}
       />
 
       <Text
@@ -183,9 +181,6 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
                 >
                   <Text fontSize="sm">Connected</Text>
                 </VStack>
-                <Box display={{ base: 'none', md: 'flex' }}>
-                  <FiChevronDown />
-                </Box>
               </HStack>
             </MenuButton>
             <MenuDropdown />
