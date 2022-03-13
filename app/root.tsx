@@ -10,6 +10,7 @@ import {
 
 import { ChakraProvider, Box, Heading } from '@chakra-ui/react'
 import { theme } from './theme'
+import Layout from './components/Layout'
 
 export const action = () => {
   return null
@@ -46,7 +47,9 @@ export default function App() {
   return (
     <Document>
       <ChakraProvider theme={theme}>
-        <Outlet />
+        <Layout>
+          <Outlet />
+        </Layout>
       </ChakraProvider>
     </Document>
   )

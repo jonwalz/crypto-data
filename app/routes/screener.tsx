@@ -59,34 +59,32 @@ export default () => {
   }
 
   return (
-    <Layout>
-      <Flex flexDir="column" px="3">
-        <Form method="post" onChange={handleChange}>
-          <RadioGroup name="data-source" defaultValue="santiment" mb="2" py="2">
-            <Stack direction="row">
-              <Radio value="santiment">Santiment</Radio>
-              <Radio value="nomics">Nomics</Radio>
-            </Stack>
-          </RadioGroup>
-          <Input
-            name="crypto-search"
-            type="text"
-            placeholder="SEARCH"
-            color="white"
-            autoComplete="off"
-          />
-        </Form>
-        <Box mt="2">
-          {['loading', 'submitting'].includes(transition.state) ? (
-            <Spinner size="lg" />
-          ) : (
-            data &&
-            data.map((item: CryptoItem) => (
-              <CryptoSummary item={item} key={item.refIndex} />
-            ))
-          )}
-        </Box>
-      </Flex>
-    </Layout>
+    <Flex flexDir="column" px="3">
+      <Form method="post" onChange={handleChange}>
+        <RadioGroup name="data-source" defaultValue="santiment" mb="2" py="2">
+          <Stack direction="row">
+            <Radio value="santiment">Santiment</Radio>
+            <Radio value="nomics">Nomics</Radio>
+          </Stack>
+        </RadioGroup>
+        <Input
+          name="crypto-search"
+          type="text"
+          placeholder="SEARCH"
+          color="white"
+          autoComplete="off"
+        />
+      </Form>
+      <Box mt="2">
+        {['loading', 'submitting'].includes(transition.state) ? (
+          <Spinner size="lg" />
+        ) : (
+          data &&
+          data.map((item: CryptoItem) => (
+            <CryptoSummary item={item} key={item.refIndex} />
+          ))
+        )}
+      </Box>
+    </Flex>
   )
 }
