@@ -1,12 +1,10 @@
 import {
-  IconButton,
   Avatar,
   Box,
   CloseButton,
   Flex,
   HStack,
   VStack,
-  Icon,
   Link,
   Drawer,
   DrawerContent,
@@ -18,9 +16,10 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
+  Button,
 } from '@chakra-ui/react'
 import { FC } from 'react'
-import { FiMenu, FiBell, FiChevronDown, FiSearch } from 'react-icons/fi'
+import { NavLink as RemixLink } from 'remix'
 
 interface LinkItemProps {
   name: string
@@ -101,28 +100,33 @@ interface NavItemProps extends FlexProps {
 }
 const NavItem = ({ children, href, ...rest }: NavItemProps) => {
   return (
-    <Link
-      href={href}
-      style={{ textDecoration: 'none' }}
-      _focus={{ boxShadow: 'none' }}
+    <RemixLink
+      to={href}
+      className={({ isActive }) => (isActive ? 'active' : '')}
     >
-      <Flex
-        align="center"
-        p="2"
-        px="3"
-        mx="4"
-        borderRadius="sm"
-        role="group"
-        cursor="pointer"
-        _hover={{
-          bg: 'green.800',
-          color: 'white',
-        }}
-        {...rest}
+      <Link
+        as="span"
+        style={{ textDecoration: 'none' }}
+        _focus={{ boxShadow: 'none' }}
       >
-        {children}
-      </Flex>
-    </Link>
+        <Flex
+          align="center"
+          p="2"
+          px="3"
+          mx="4"
+          borderRadius="sm"
+          role="group"
+          cursor="pointer"
+          _hover={{
+            bg: 'green.800',
+            color: 'white',
+          }}
+          {...rest}
+        >
+          {children}
+        </Flex>
+      </Link>
+    </RemixLink>
   )
 }
 
@@ -143,12 +147,11 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
       justifyContent={{ base: 'space-between', md: 'flex-end' }}
       {...rest}
     >
-      <IconButton
+      <Button
         display={{ base: 'flex', md: 'none' }}
         onClick={onOpen}
         variant="outline"
         aria-label="open menu"
-        icon={<FiMenu />}
       />
 
       <Text
@@ -161,12 +164,6 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
       </Text>
 
       <HStack spacing={{ base: '0', md: '6' }}>
-        <IconButton
-          size="lg"
-          variant="ghost"
-          aria-label="open menu"
-          icon={<FiBell />}
-        />
         <Flex alignItems={'center'}>
           <Menu>
             <MenuButton
@@ -182,14 +179,8 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
                   spacing="1px"
                   ml="2"
                 >
-                  <Text fontSize="sm">Justina Clark</Text>
-                  <Text fontSize="xs" color="green.300">
-                    Admin
-                  </Text>
+                  <Text fontSize="sm">Connected</Text>
                 </VStack>
-                <Box display={{ base: 'none', md: 'flex' }}>
-                  <FiChevronDown />
-                </Box>
               </HStack>
             </MenuButton>
             <MenuDropdown />
@@ -201,9 +192,10 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
 }
 
 const menuItems = [
-  { name: 'Profile', href: '/profile' },
-  { name: 'Settings', href: '/settings' },
-  { name: 'Billing', href: '/billing' },
+  // Leaving these for future implementation
+  // { name: 'Profile', href: '/profile' },
+  // { name: 'Settings', href: '/settings' },
+  // { name: 'Billing', href: '/billing' },
   { name: 'Sign out', href: '/sign-out' },
 ]
 

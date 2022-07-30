@@ -1,13 +1,13 @@
-import { Flex, useColorModeValue, Box, chakra } from "@chakra-ui/react";
+import { Flex, useColorModeValue, Box, chakra } from '@chakra-ui/react'
 
 export interface CurrencyDetailCardProps {
-  name: string;
-  slug: string;
-  ticker: string;
-  priceUsd: number;
-  longDescription: string;
-  logoUrl: string;
-  description: string;
+  name: string
+  slug: string
+  ticker: string
+  priceUsd: number
+  longDescription: string
+  logoUrl: string
+  description: string
 }
 
 export function CurrencyDetailCard({
@@ -31,9 +31,9 @@ export function CurrencyDetailCard({
           bgSize="cover"
           style={{
             backgroundImage: `url(${logoUrl})`,
-            backgroundSize: "50%",
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "center",
+            backgroundSize: '50%',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'center',
           }}
         ></Box>
 
@@ -52,5 +52,5 @@ export function CurrencyDetailCard({
         </Box>
       </Flex>
     </Flex>
-  );
+  )
 }

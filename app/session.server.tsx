@@ -7,8 +7,22 @@ export const sessionSecret = getServerSafeEnvVariable('SESSION_SECRET')
 export const sessionKey = 'super_sick_crypto_data_session_key'
 export const sessionUserKey = 'userId'
 
-export async function register(args: { publicAddress: string; nonce: string }) {
-  return await createUser(args)
+export async function register(args: {
+  publicAddress: string
+  nonce: string
+  opts: {
+    redirect: string
+  }
+}) {
+  await createUser(args)
+
+  const session = await sessionStorage.getSession()
+
+  return redirect(args.opts.redirect, {
+    headers: {
+      'Set-Cookie': await sessionStorage.commitSession(session),
+    },
+  })
 }
 
 export async function login(publicAddress: string) {

@@ -7,13 +7,27 @@ import {
   Spinner,
   Stack,
 } from '@chakra-ui/react'
-import { Form, json, useActionData, useSubmit, useTransition } from 'remix'
+import {
+  Form,
+  json,
+  LoaderFunction,
+  useActionData,
+  useSubmit,
+  useTransition,
+} from 'remix'
 import { nomicsFetchCurrencies } from '~/server/nomics/nomics'
 import { santimentFetchCurrencies } from '~/server/santiment'
 import { CryptoSummary } from '~/components/CryptoSummary'
 import { CryptoItem } from '~/components/CryptoSummary/types'
-import { searchData } from './utils'
-import Layout from '~/components/Layout'
+import { searchData } from '~/utils/search'
+
+export const loader: LoaderFunction = async ({ request }) => {
+  // await requireUser(request, {
+  //   redirect: '/sign-in',
+  // })
+
+  return null
+}
 
 export async function action({ request }) {
   const result = await request.formData()
@@ -43,34 +57,32 @@ export default () => {
   }
 
   return (
-    <Layout>
-      <Flex flexDir="column" px="3">
-        <Form method="post" onChange={handleChange}>
-          <RadioGroup name="data-source" defaultValue="santiment" mb="2" py="2">
-            <Stack direction="row">
-              <Radio value="santiment">Santiment</Radio>
-              <Radio value="nomics">Nomics</Radio>
-            </Stack>
-          </RadioGroup>
-          <Input
-            name="crypto-search"
-            type="text"
-            placeholder="SEARCH"
-            color="white"
-            autoComplete="off"
-          />
-        </Form>
-        <Box mt="2">
-          {['loading', 'submitting'].includes(transition.state) ? (
-            <Spinner size="lg" />
-          ) : (
-            data &&
-            data.map((item: CryptoItem) => (
-              <CryptoSummary item={item} key={item.refIndex} />
-            ))
-          )}
-        </Box>
-      </Flex>
-    </Layout>
+    <Flex flexDir="column" px="3">
+      <Form method="post" onChange={handleChange}>
+        <RadioGroup name="data-source" defaultValue="santiment" mb="2" py="2">
+          <Stack direction="row">
+            <Radio value="santiment">Santiment</Radio>
+            <Radio value="nomics">Nomics</Radio>
+          </Stack>
+        </RadioGroup>
+        <Input
+          name="crypto-search"
+          type="text"
+          placeholder="SEARCH"
+          color="white"
+          autoComplete="off"
+        />
+      </Form>
+      <Box mt="2">
+        {['loading', 'submitting'].includes(transition.state) ? (
+          <Spinner size="lg" />
+        ) : (
+          data &&
+          data.map((item: CryptoItem) => (
+            <CryptoSummary item={item} key={item.refIndex} />
+          ))
+        )}
+      </Box>
+    </Flex>
   )
 }
