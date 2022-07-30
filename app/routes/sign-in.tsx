@@ -9,8 +9,9 @@ let web3: Web3 | undefined = undefined
 
 export const loader: LoaderFunction = async ({ request }) => {
   await redirectUser(request, {
-    redirect: '/dashboard',
+    redirect: '/screener',
   })
+
   return {}
 }
 
@@ -21,9 +22,7 @@ export const action: ActionFunction = async ({ request }) => {
   try {
     return await handleAttemptLogin(address, '/screener')
   } catch (e) {
-    const user = handleCreateUser(address)
-
-    return json(user)
+    return { error: e }
   }
 }
 

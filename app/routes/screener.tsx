@@ -24,9 +24,9 @@ import { requireUser } from '~/session.server'
 import { searchData } from '~/utils/search'
 
 export const loader: LoaderFunction = async ({ request }) => {
-  await requireUser(request, {
-    redirect: '/sign-in',
-  })
+  // await requireUser(request, {
+  //   redirect: '/sign-in',
+  // })
 
   return null
 }

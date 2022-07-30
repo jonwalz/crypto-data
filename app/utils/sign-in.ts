@@ -24,14 +24,15 @@ export const handleAttemptLogin = async (
   } catch (e) {
     let formError: string
     if (e instanceof Error) {
-      formError = e.message
+      formError = e.message + '!!!'
     } else if (typeof e === 'string') {
       formError = e
     } else {
       formError = 'There was an error logging in. Please try again later.'
     }
 
-    return json<ActionData>({ formError }, 401)
+    console.log('HERE')
+    return handleCreateUser(address)
   }
 
   return await createUserSession(user.id, {
