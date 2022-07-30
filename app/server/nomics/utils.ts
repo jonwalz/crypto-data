@@ -1,6 +1,6 @@
 export function formatCurrencies(resp) {
   return resp.map((item) => {
-    const { id, name, market_cap, price, symbol, ["1d"]: oneDay } = item;
+    const { id, name, market_cap, price, symbol, ['1d']: oneDay } = item
 
     return {
       id,
@@ -10,8 +10,8 @@ export function formatCurrencies(resp) {
       symbol: symbol,
       ticker: symbol,
       volumeChange24h: oneDay.volume,
-    };
-  });
+    }
+  })
 }
 
 // Nomics Item example
