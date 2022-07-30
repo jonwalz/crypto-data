@@ -1,38 +1,32 @@
-import { createUserSession, register } from '~/session.server'
+import { createUserSession, login, register } from '~/session.server'
 import { v4 as uuidv4 } from 'uuid'
 import { User } from '~/models'
-import { json, redirect } from 'remix'
-import { getUser, verifyLogin } from '~/db.server'
+import { json } from 'remix'
 
 export function handleCreateUser(address: string) {
   const nonce = uuidv4()
 
-  return register({
-    publicAddress: String(address),
-    nonce,
-    opts: { redirect: '/screener' },
-  })
+  return register({ publicAddress: String(address), nonce })
 }
 
 export const handleAttemptLogin = async (
   address: string,
-  redirectTo: string = '/screener',
+  redirectTo: string,
 ) => {
   let user: User | null
   try {
-    user = await verifyLogin(address)
+    user = await login(address)
   } catch (e) {
     let formError: string
     if (e instanceof Error) {
-      formError = e.message + '!!!'
+      formError = e.message
     } else if (typeof e === 'string') {
       formError = e
     } else {
       formError = 'There was an error logging in. Please try again later.'
     }
 
-    console.log('HERE')
-    return handleCreateUser(address)
+    return json<ActionData>({ formError }, 401)
   }
 
   return await createUserSession(user.id, {

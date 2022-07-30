@@ -3,7 +3,6 @@ import {
   CurrencyDetailCard,
   CurrencyDetailCardProps,
 } from '~/components/CurrencyDetailCard'
-import Layout from '~/components/Layout'
 import {
   fetchCurrencyDetails,
   getCurrencyIdFromTicker,

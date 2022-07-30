@@ -7,6 +7,5 @@ export const loader: LoaderFunction = async ({ request }) => {
   if (user) {
     return redirect('screener')
   }
-
   return redirect('sign-in')
 }

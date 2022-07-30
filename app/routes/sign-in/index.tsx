@@ -1,17 +1,17 @@
-import { Flex, Box, Stack, Button, Heading } from '@chakra-ui/react'
-import { ActionFunction, Form, json, LoaderFunction, useSubmit } from 'remix'
-import { handleAttemptLogin, handleCreateUser } from '../utils/sign-in'
+import { useState } from 'react'
+import { Flex, Box, Stack, Button, Heading, Input } from '@chakra-ui/react'
+import { ActionFunction, Form, json, LoaderFunction, useFetcher } from 'remix'
+import { handleAttemptLogin, handleCreateUser } from './utils'
 import { redirectUser } from '~/session.server'
 import Web3 from 'web3'
 import detectEthereumProvider from '@metamask/detect-provider'
 
-let web3: Web3 | undefined = undefined
+let web3: Web3 | undefined = undefined // Will hold the web3 instance
 
 export const loader: LoaderFunction = async ({ request }) => {
   await redirectUser(request, {
-    redirect: '/screener',
+    redirect: '/dashboard',
   })
-
   return {}
 }
 
@@ -22,14 +22,18 @@ export const action: ActionFunction = async ({ request }) => {
   try {
     return await handleAttemptLogin(address, '/screener')
   } catch (e) {
-    return { error: e }
+    const user = handleCreateUser(address)
+
+    return json(user)
   }
 }
 
 export default function SignIn() {
-  const submit = useSubmit()
+  const fetcher = useFetcher()
+  const [address, setAddress] = useState<string | null>('')
 
   const handleGetAddress = async () => {
+    // Check if MetaMask is installed
     if (!(window as any).ethereum) {
       window.alert('Please install MetaMask first.')
       return
@@ -37,10 +41,13 @@ export default function SignIn() {
 
     if (!web3) {
       try {
+        // Request account access if needed
         await (window as any).ethereum.request({
           method: 'eth_requestAccounts',
         })
 
+        // We don't know window.web3 version, so we use our own instance of Web3
+        // with the injected provider given by MetaMask
         const provider = await detectEthereumProvider()
         // @ts-ignore
         web3 = new Web3(provider)
@@ -62,28 +69,25 @@ export default function SignIn() {
       params: [publicAddress, msgParams],
     })
 
-    submit({ publicAddress: ethResult }, { method: 'post' })
+    fetcher.submit({ publicAddress }, { method: 'post', action: '/sign-in' })
   }
 
   return (
-    <Flex
-      minH={'100vh'}
-      width="100%"
-      align={'center'}
-      justify={'center'}
-      bg={'green.800'}
-      position="absolute"
-      left={0}
-      top={0}
-    >
+    <Flex minH={'100vh'} align={'center'} justify={'center'} bg={'green.800'}>
       <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
         <Stack align={'center'}>
           <Heading fontSize={'4xl'}>Sign in with your wallet</Heading>
         </Stack>
         <Box rounded={'lg'} bg={'gray.700'} boxShadow={'lg'} p={8}>
           <Stack spacing={4}>
-            <Form method="post">
+            <fetcher.Form method="post" action="/sign-in">
               <Stack spacing={10}>
+                <Input
+                  value={address}
+                  onChange={(e) => setAddress(e.currentTarget.value)}
+                  name="publicAddress"
+                  readOnly
+                />
                 <Button
                   onClick={handleGetAddress}
                   bg={'green.400'}
@@ -94,8 +98,18 @@ export default function SignIn() {
                 >
                   Connect wallet
                 </Button>
+                <Button
+                  type="submit"
+                  bg={'green.400'}
+                  color={'white'}
+                  _hover={{
+                    bg: 'green.500',
+                  }}
+                >
+                  Submit
+                </Button>
               </Stack>
-            </Form>
+            </fetcher.Form>
           </Stack>
         </Box>
       </Stack>

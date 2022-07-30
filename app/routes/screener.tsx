@@ -19,14 +19,12 @@ import { nomicsFetchCurrencies } from '~/server/nomics/nomics'
 import { santimentFetchCurrencies } from '~/server/santiment'
 import { CryptoSummary } from '~/components/CryptoSummary'
 import { CryptoItem } from '~/components/CryptoSummary/types'
-import Layout from '~/components/Layout'
-import { requireUser } from '~/session.server'
 import { searchData } from '~/utils/search'
 
 export const loader: LoaderFunction = async ({ request }) => {
-  await requireUser(request, {
-    redirect: '/sign-in',
-  })
+  // await requireUser(request, {
+  //   redirect: '/sign-in',
+  // })
 
   return null
 }
