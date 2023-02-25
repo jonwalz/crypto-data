@@ -6,7 +6,7 @@ import {
   RadioGroup,
   Spinner,
   Stack,
-} from '@chakra-ui/react'
+} from "@chakra-ui/react";
 import {
   Form,
   json,
@@ -14,67 +14,55 @@ import {
   useActionData,
   useSubmit,
   useTransition,
-} from 'remix'
-import { nomicsFetchCurrencies } from '~/server/nomics/nomics'
-import { santimentFetchCurrencies } from '~/server/santiment'
-import { CryptoSummary } from '~/components/CryptoSummary'
-import { CryptoItem } from '~/components/CryptoSummary/types'
-import { searchData } from '~/utils/search'
+} from "remix";
+import { santimentFetchCurrencies } from "~/server/santiment";
+import { CryptoSummary } from "~/components/CryptoSummary";
+import { CryptoItem } from "~/components/CryptoSummary/types";
+import { searchData } from "~/utils/search";
 
 export const loader: LoaderFunction = async ({ request }) => {
   // await requireUser(request, {
   //   redirect: '/sign-in',
   // })
 
-  return null
-}
+  return null;
+};
 
 export async function action({ request }) {
-  const result = await request.formData()
-  const searchString = result.get('crypto-search')
-  const dataSourceSelection = result.get('data-source')
+  const result = await request.formData();
+  const searchString = result.get("crypto-search");
 
-  if (!searchString) return null
+  if (!searchString) return null;
 
-  const dataSource = {
-    santiment: santimentFetchCurrencies,
-    nomics: nomicsFetchCurrencies,
-  }[dataSourceSelection]
+  const data = await santimentFetchCurrencies();
 
-  const data = await dataSource()
-
-  return json(searchData(searchString, data))
+  return json(searchData(searchString, data));
 }
 
 // https://remix.run/docs/en/v1/api/remix#usesubmit
 export default () => {
-  const submit = useSubmit()
-  const data = useActionData()
-  const transition = useTransition()
+  const submit = useSubmit();
+  const data = useActionData();
+  const transition = useTransition();
 
   const handleChange = (event) => {
-    submit(event.currentTarget, { replace: true })
-  }
+    submit(event.currentTarget, { replace: true });
+  };
 
   return (
     <Flex flexDir="column" px="3">
       <Form method="post" onChange={handleChange}>
-        <RadioGroup name="data-source" defaultValue="santiment" mb="2" py="2">
-          <Stack direction="row">
-            <Radio value="santiment">Santiment</Radio>
-            <Radio value="nomics">Nomics</Radio>
-          </Stack>
-        </RadioGroup>
         <Input
           name="crypto-search"
           type="text"
           placeholder="SEARCH"
           color="white"
           autoComplete="off"
+          mt={4}
         />
       </Form>
       <Box mt="2">
-        {['loading', 'submitting'].includes(transition.state) ? (
+        {["loading", "submitting"].includes(transition.state) ? (
           <Spinner size="lg" />
         ) : (
           data &&
@@ -84,5 +72,5 @@ export default () => {
         )}
       </Box>
     </Flex>
-  )
-}
+  );
+};

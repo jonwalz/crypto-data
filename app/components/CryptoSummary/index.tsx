@@ -16,7 +16,7 @@ export const CryptoSummary: React.FC<CryptoSummaryProps> = ({ item }) => {
         alignItems="flex-end"
         cursor="pointer"
         _hover={{
-          bg: "green.800",
+          bg: "brand.800",
           color: "white",
         }}
       >
