@@ -6,7 +6,7 @@
   "scripts": {
     "build": "remix build",
     "dev": "cross-env NODE_ENV=development netlify dev",
-    "postinstall": "patch-package && remix setup node",
+    "postinstall": "remix setup node",
     "seed": "prisma db push && node prisma/seed.js"
   },
   "dependencies": {
