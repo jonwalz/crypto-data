@@ -9,12 +9,11 @@ import {
 } from "@chakra-ui/react";
 import {
   Form,
-  json,
-  LoaderFunction,
   useActionData,
   useSubmit,
   useTransition,
-} from "remix";
+} from "@remix-run/react";
+import { LoaderFunction, json } from "@remix-run/server-runtime";
 import { santimentFetchCurrencies } from "~/server/santiment";
 import { CryptoSummary } from "~/components/CryptoSummary";
 import { CryptoItem } from "~/components/CryptoSummary/types";

@@ -6,7 +6,7 @@ import {
   Scripts,
   ScrollRestoration,
   useCatch,
-} from "remix";
+} from "@remix-run/react";
 
 import { ChakraProvider, Box, Heading } from "@chakra-ui/react";
 import { theme } from "./theme";

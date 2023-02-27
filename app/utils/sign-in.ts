@@ -1,8 +1,7 @@
 import { createUserSession, register } from "~/session.server";
 import { v4 as uuidv4 } from "uuid";
 import { User } from "~/models";
-import { json, redirect } from "remix";
-import { getUser, verifyLogin } from "~/db.server";
+import { verifyLogin } from "~/db.server";
 
 export function handleCreateUser(address: string) {
   const nonce = uuidv4();
@@ -19,7 +18,7 @@ export const handleAttemptLogin = async (
   redirectTo: string = "/screener"
 ) => {
   if (address === "faker") {
-    return await createUserSession("faker", {
+    return await createUserSession("faker ", {
       redirect: redirectTo || "/screener",
     });
   }

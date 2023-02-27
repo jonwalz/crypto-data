@@ -1,5 +1,6 @@
 import { Flex, Box, Stack, Button, Heading } from "@chakra-ui/react";
-import { ActionFunction, Form, json, LoaderFunction, useSubmit } from "remix";
+import { ActionFunction, LoaderFunction } from "@remix-run/server-runtime";
+import { Form, useSubmit } from "@remix-run/react";
 import { handleAttemptLogin, handleCreateUser } from "../utils/sign-in";
 import { redirectUser } from "~/session.server";
 import Web3 from "web3";
@@ -75,22 +76,28 @@ export default function SignIn() {
       width="100%"
       align={"center"}
       justify={"center"}
-      bg={"brand.800"}
+      bg={"gray.700"}
       position="absolute"
       left={0}
       top={0}
     >
       <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
-        <Stack align={"center"}>
-          <Heading fontSize={"4xl"}>Sign in with your wallet</Heading>
-        </Stack>
-        <Box rounded={"lg"} bg={"gray.700"} boxShadow={"lg"} p={8}>
+        <Box
+          rounded={"lg"}
+          border="2px"
+          borderColor={"white"}
+          boxShadow={"lg"}
+          p={8}
+        >
+          <Heading color={"white"} mb="84px" fontSize={"4xl"}>
+            Sign in with your wallet
+          </Heading>
           <Stack spacing={4}>
             <Form method="post">
-              <Stack spacing={10}>
+              <Stack spacing={5}>
                 <Button
                   onClick={handleGetAddress}
-                  bg={"brand.400"}
+                  bg={"brand.600"}
                   color={"white"}
                   _hover={{
                     bg: "brand.500",
@@ -98,14 +105,7 @@ export default function SignIn() {
                 >
                   Connect wallet
                 </Button>
-                <Button
-                  onClick={handleFakeIt}
-                  bg={"transparent"}
-                  color={"white"}
-                  _hover={{
-                    bg: "brand.600",
-                  }}
-                >
+                <Button variant="link" onClick={handleFakeIt} color={"white"}>
                   (or just fake it)
                 </Button>
               </Stack>

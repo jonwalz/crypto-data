@@ -19,7 +19,7 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { FC } from "react";
-import { NavLink as RemixLink } from "remix";
+import { NavLink as RemixLink } from "@remix-run/react";
 
 interface LinkItemProps {
   name: string;

@@ -1,0 +1,4 @@
+{
+  "extends": "@remix-run/eslint-config",
+  "semi": [2, "never"]
+}

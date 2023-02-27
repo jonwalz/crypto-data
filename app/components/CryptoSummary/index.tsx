@@ -1,5 +1,5 @@
 import { Box } from "@chakra-ui/react";
-import { Link } from "remix";
+import { Link } from "@remix-run/react";
 import { CryptoSummaryProps } from "./types";
 
 export const CryptoSummary: React.FC<CryptoSummaryProps> = ({ item }) => {
