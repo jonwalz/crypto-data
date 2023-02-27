@@ -6,22 +6,22 @@ import {
   Scripts,
   ScrollRestoration,
   useCatch,
-} from "@remix-run/react";
+} from '@remix-run/react'
 
-import { ChakraProvider, Box, Heading } from "@chakra-ui/react";
-import { theme } from "./theme";
-import Layout from "./components/Layout";
+import { ChakraProvider, Box, Heading } from '@chakra-ui/react'
+import { theme } from './theme'
+import Layout from './components/Layout'
 
 export const action = () => {
-  return null;
-};
+  return null
+}
 
 function Document({
   children,
-  title = "Crypto Alerts",
+  title = 'Crypto Alerts',
 }: {
-  children: React.ReactNode;
-  title?: string;
+  children: React.ReactNode
+  title?: string
 }) {
   return (
     <html lang="en">
@@ -40,7 +40,7 @@ function Document({
         <LiveReload />
       </body>
     </html>
-  );
+  )
 }
 
 export default function App() {
@@ -52,12 +52,12 @@ export default function App() {
         </Layout>
       </ChakraProvider>
     </Document>
-  );
+  )
 }
 
 // How ChakraProvider should be used on CatchBoundary
 export function CatchBoundary() {
-  const caught = useCatch();
+  const caught = useCatch()
 
   return (
     <Document title={`${caught.status} ${caught.statusText}`}>
@@ -69,7 +69,7 @@ export function CatchBoundary() {
         </Box>
       </ChakraProvider>
     </Document>
-  );
+  )
 }
 
 // How ChakraProvider should be used on ErrorBoundary
@@ -84,5 +84,5 @@ export function ErrorBoundary({ error }: { error: Error }) {
         </Box>
       </ChakraProvider>
     </Document>
-  );
+  )
 }

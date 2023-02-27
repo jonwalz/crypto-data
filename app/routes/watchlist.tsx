@@ -1,3 +1,2 @@
-import Layout from '~/components/Layout'
-
+// placeholder
 export default () => <div>watchlist</div>

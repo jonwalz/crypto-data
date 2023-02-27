@@ -8669,11 +8669,6 @@ remark-rehype@^9.0.0:
     mdast-util-to-hast "^11.0.0"
     unified "^10.0.0"
 
-remix@^1.13.0:
-  version "1.13.0"
-  resolved "https://registry.yarnpkg.com/remix/-/remix-1.13.0.tgz#d81650bd9588a3b0e372b0a10743969242fc3ad1"
-  integrity sha512-O3Tr8hHloZYoOFONy2AIv4jod3gBdPecYLK7FauDltmbmF7zuaFAys8mhx1j+5kCSnC5XG5FT3nM7hXkA++2nA==
-
 request@^2.79.0:
   version "2.88.2"
   resolved "https://registry.yarnpkg.com/request/-/request-2.88.2.tgz#d73c918731cb5a87da047e207234146f664d12b3"

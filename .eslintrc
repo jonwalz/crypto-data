@@ -1,4 +1,5 @@
 {
-  "extends": "@remix-run/eslint-config",
+  "extends": ["prettier", "@remix-run/eslint-config"],
+  "plugins": ["prettier"],
   "semi": [2, "never"]
 }

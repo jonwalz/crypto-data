@@ -11,7 +11,7 @@ export function getServerSafeEnvVariable<
     return val
   } catch (_) {
     throw Error(
-      'You tried to access a server-side environment variable on the client!',
+      'You tried to access a server-side environment variable on the client!'
     )
   }
 }
